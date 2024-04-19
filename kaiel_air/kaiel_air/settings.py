@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
+    'kaiel_airline',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +63,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "templates"
+            BASE_DIR / "kaiel_airline/templates"
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,7 +125,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "kaiel_airline/static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -144,6 +147,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+COMPRESS_ROOT = BASE_DIR / 'kaiel_airline/static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder', "django.contrib.staticfiles.finders.FileSystemFinder",
+"django.contrib.staticfiles.finders.AppDirectoriesFinder",)
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
